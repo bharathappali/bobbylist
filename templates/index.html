@@ -9,53 +9,49 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bobbylist.css') }}">
 </head>
 <body class="dualcolorbackground" style="font-family: 'HelveticaNeueThin', 'sans-serif'">
-<div class="full-bg-img flex-center white-text relative_position">
+<div class="full-bg-img flex-center">
     <div class="animated fadeInUp centerdiv">
         <img src="{{ url_for('static', filename = 'imgs/bobbylist_logo.png') }}">
-        <div id="login-div" class="col-md-12 card hoverable white" style="border-radius: 50%;padding-top: 15%;padding-bottom: 20%;padding-left: 15%;padding-right: 15%">
-            <form action="" method="post" style="padding: 20px">
+        <div class="col-lg-12">
+            <div class="card white hoverable"  id="signup-div" style="padding: 20px 20px 20px 20px;border-top: 5px solid #388E3C;display: none">
+                <form method="post" action="/login" id="signup_form">
+                    <div class="md-form" style="text-align: left">
+                        <i class="fa fa-user prefix fa-3x grey-text" style="margin-top: 7px"></i>
+                        <input type="email" class="form-control" id="signup_email" name="signup_email" required>
+                        <label for="signup_email">Email</label>
+                    </div>
+                    <div class="md-form" style="text-align: left">
+                        <i class="fa fa-lock prefix fa-3x grey-text" style="margin-top: 7px"></i>
+                        <input type="password" class="form-control" id="signup_password" name="signup_password" required>
+                        <label for="signup_password">Password</label>
+                    </div>
+                    <div class="md-form" style="text-align: left">
+                        <i class="fa fa-reply prefix fa-3x grey-text" style="margin-top: 7px"></i>
+                        <input type="password" class="form-control" id="signup_retype_password" name="signup_retype_password" required>
+                        <label for="signup_retype_password">Retype Password</label>
+                    </div>
+                    <div class="md-form">
+                        <input type="submit" class="login_btn" id="signup_btn" value="Sign Up">
+                    </div>
+                </form>
+                <label>Have an Account ? <i class="fa fa-sign-in prefix black-text" style="margin-top: 7px"></i><span class="pointer-cursor" id="login-switcher" style="color: #514A9D;cursor: pointer;"> Login </span> </label>
+            </div>
+            <div class="card white hoverable" id="login-div" style="padding: 20px 20px 20px 20px;border-top: 5px solid #388E3C">
+                <div class="md-form" style="text-align: left">
+                    <i class="fa fa-user prefix fa-3x grey-text" style="margin-top: 7px"></i>
+                    <input type="email" class="form-control" id="login_email">
+                    <label for="login_email">Email</label>
+                </div>
+                <div class="md-form" style="text-align: left">
+                    <i class="fa fa-lock prefix fa-3x grey-text" style="margin-top: 7px"></i>
+                    <input type="password" class="form-control" id="login_password">
+                    <label for="login_password">Password</label>
+                </div>
                 <div class="md-form">
-                    <input type="text" id="username-login" class="form-control" style="color: #000000;text-align: center">
-                    <label style="font-size: medium;margin-left: 42%" for="username-login">Email</label>
+                    <input type="submit" class="login_btn" value="Login">
                 </div>
-
-                <div class="md-form">
-                    <input type="password" id="password-login" class="form-control" style="text-align: center">
-                    <label style="font-size: medium;margin-left: 38%" for="password-login">Password</label>
-                </div>
-                <div class="md-form" style="text-align: center">
-                    <input type="submit" style="width: 50%;font-weight: bold;font-size: medium;border-radius: 50px;padding: 20px;color: #514A9D;background: #FFFFFF;border: 2px solid #514A9D" value="Login">
-                </div>
-                <div class="col-md-12" style="text-align: center">
-                    <label style="font-size: medium;font-weight: lighter;color: #514A9D;text-decoration: underline;cursor: pointer;"><a href="/home">forgot password</a></label>
-                </div>
-                <div class="col-md-12" style="text-align: center">
-                    <label style="font-size: medium;font-weight: lighter;color: #000000">Need An Account? <span id="signup-switcher" style="font-size: medium;color: #514A9D;text-decoration: underline;cursor: pointer">Sign Up</span></label>
-                </div>
-            </form>
-        </div>
-        <div id="signup-div" class="col-md-12 card hoverable white" style="display:none;border-radius: 50%;padding-top: 15%;padding-bottom: 20%;padding-left: 15%;padding-right: 15%">
-            <form action="#" method="post" style="padding: 20px">
-                <div class="md-form">
-                    <input type="text" id="username-signup" class="form-control" style="color: #000000;text-align: center">
-                    <label style="font-size: medium;margin-left: 42%" for="username-signup">Email</label>
-                </div>
-
-                <div class="md-form">
-                    <input type="password" id="password-signup" class="form-control" style="text-align: center">
-                    <label style="font-size: medium;margin-left: 38%" for="password-signup">Password</label>
-                </div>
-                <div class="md-form">
-                    <input type="password" id="confirm-password-signup" class="form-control">
-                    <label style="font-size: medium;margin-left: 28%" for="confirm-password-signup">Confirm Password</label>
-                </div>
-                <div class="md-form" style="text-align: center">
-                    <input type="submit" style="width: 50%;font-weight: bold;font-size: medium;border-radius: 50px;padding: 20px;color: #514A9D;background: #FFFFFF;border: 2px solid #514A9D" value="Signup">
-                </div>
-                <div class="col-md-12" style="text-align: center">
-                    <label style="font-size: medium;font-weight: lighter;color: #000000">Already had an Account? <span id="login-switcher" style="font-size: medium;color: #514A9D;text-decoration: underline;cursor: pointer">Login</span></label>
-                </div>
-            </form>
+                <label>Create Account <i class="fa fa-user-plus prefix black-text" style="margin-top: 7px"></i><span class="pointer-cursor" id="signup-switcher" style="color: #514A9D;cursor: pointer;"> Signup </span> </label>
+            </div>
         </div>
     </div>
 </div>
@@ -71,6 +67,13 @@
         $("#signup-switcher").click(function () {
             $("#login-div").hide();
             $("#signup-div").fadeIn(500);
+        });
+        $('#signup_btn').click(function (e) {
+            var password = $('#signup_password').val();
+            var retype_password = $('#signup_retype_password').val();
+            if (password != retype_password){
+                e.preventDefault();
+            }
         });
     });
 </script>

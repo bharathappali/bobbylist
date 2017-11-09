@@ -33,7 +33,24 @@
     position: relative;
 }
 
+.login_btn {
+    border-radius: 50px;
+    font-weight: bold;
+    padding: 5px 20px 5px 20px;
+    font-size: medium;
+    color: #514A9D;
+    border: 2px solid #514A9D;
+    background: #FFFFFF;
+}
 
+.login_btn:hover {
+    background: #514A9D;
+    color: #FFFFFF;
+}
+
+.pointer-cursor{
+    cursor: pointer;
+}
 
 input[type=text]:focus:not([readonly]) + label {
     color: #514A9D;
