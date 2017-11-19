@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BobbyList - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/mdb.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bobbylist.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/dashboard.css') }}">
+    <style>
+        #navbar-right-options > * {
+            cursor: pointer;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+</head>
+<body class="dualcolorbackground" style="font-family: 'HelveticaNeueThin'">
+<nav class="navbar navbar-expand-sm fixed-top" style="margin-bottom: 0px">
+        <!-- Search Box-->
+        <div class="search-box">
+            <button class="dismiss"><i class="fa fa-times red-text"></i></button>
+            <form id="searchForm" action="#" role="search">
+                <input type="search" id="search-input" name="search-input" placeholder="What are you looking for..." class="form-control">
+            </form>
+        </div>
+        <div class="container-fluid" style="height: 30px">
+            <label style="font-size: large; ">Dashboard</label>
+            <div id="navbar-right-options" style="float: right;height: 100%">
+                <i class="fa fa-search" id="search"></i>
+                <i class="fa fa-envelope"></i>
+                <label style="font-size: large">logout</label>
+            </div>
+        </div>
+    </nav>
+
+    <div class="card hoverable white navbar-search">
+        <h1 class="black-text text-center">I Guess you are typing something </h1>
+    </div>
+    <div class="container-fluid" style="display: flex">
+        <div class="sidebar">
+
+        </div>
+    </div>
+<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/tether.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/popper.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>
+<script>
+    $(function () {
+        $('#search').on('click', function (e) {
+            e.preventDefault();
+            $('.search-box').fadeIn();
+            $('#search-input').focus();
+        });
+        $('#search-input').on('keyup',function (e) {
+            $('.navbar-search').show();
+        });
+        $('.dismiss').on('click', function (e) {
+            e.preventDefault();
+            $('.search-box').fadeOut();
+            $('.navbar-search').hide();
+        });
+    });
+</script>
+</body>
+</html>
