@@ -3,6 +3,10 @@ from flask_triangle import Triangle
 from flask_mail import Mail, Message
 import hashlib
 from pymongo import MongoClient
+from multiprocessing import Value
+
+
+counter = Value('i', 0)
 
 app = Flask(__name__, static_path='/static')
 Triangle(app)
@@ -84,6 +88,8 @@ def create_user():
     if request.method == 'GET':
         return render_template("index.html")
     if request.method == 'POST':
+        with counter.get_lock():
+            counter.value += 1
         signup_dict = {}
         signup_dict['firstname_signup'] = request.form['firstnameinput']
         signup_dict['lastname_signup'] = request.form['lastnameinput']
@@ -95,6 +101,22 @@ def create_user():
         bobbylistdb.users.insert(signup_dict)
         user_db = bobbylistdb.users.find_one({"user_email": signup_dict['email_signup']}, {"_id": 0})
         return render_template("dashboard.html", newuser=True, user_details = user_db)
+
+@app.route('/dashboard/create_task',  methods=['GET','POST'])
+def create_task():
+    if request.method == 'GET':
+        return render_template("index.html")
+    if request.method == 'POST':
+        task_dict = {}
+        task_dict['task_title'] = request.form['task_title']
+        task_dict['task_assignee'] = request.form['task_assignee']
+        task_dict['task_assigned_by'] = request.form['task_assigned_by']
+        task_dict['task_desc'] = request.form['task_desc']
+        task_dict['task_creation_date'] = request.form['task_creation_date']
+        task_dict['task_due_date'] = request.form['task_due_date']
+        task_dict['task_milestones'] = request.form.getlist('milestones')
+        bobbylistdb.tasks.insert(task_dict)
+        return "True"
 
 
 if __name__ == '__main__':
