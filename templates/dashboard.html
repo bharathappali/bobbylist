@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>BobbyList - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bobbylist.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/mdb.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bobbylist.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/dragula.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/pignose.calendar.css') }}">
     <style>
-
-        .dualcolorbackground {
-            background: #24C6DC; /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #24C6DC , #514A9D); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #24C6DC , #514A9D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        }
 
         #navbar-right-options > * {
             cursor: pointer;
@@ -491,9 +485,14 @@
             margin-left: 4px;
         }
 
+        .view_milestones_fieldset {
+            border: 1px solid #514A9D;
+        }
+
     </style>
 </head>
-<body class="dualcolorbackground" style="font-family: 'HelveticaNeueThin'">
+<body style="font-family: 'HelveticaNeueThin'">
+    <div class="full-bg-img dualcolorbackground" style="overflow-y: scroll;">
     <nav class="navbar navbar-expand-sm fixed-top" style="margin-bottom: 0px;position: fixed;width: 100%;">
         <!-- Search Box-->
         <div class="search-box">
@@ -531,7 +530,7 @@
             </div>
         </div>
         <div class="mainpane">
-            <div class="container-fluid" id="create_task_container" style="display: none">
+            <div class="container-fluid" id="create_task_container" style="display: none;">
                 <form action="/dashboard/create_task" method="post">
                     <div class="col-lg-12">
                         <div class="col-lg-7 card white hoverable" style="z-index: 99">
@@ -593,7 +592,7 @@
             <div class="container-fluid" id="my_tasks_container">
                 <div class="row">
                     <div class="col-lg-4">
-                        <h1 class="white-text text-center">To be Started</h1>
+                        <h3 class="white-text text-center">To be Started</h3>
                         <div id="about_to_start_task" class="cards_holder" style="height: 500px">
                             <div class="card hoverable white" style="padding: 10px">
                                 <div class="task_tags_holder">
@@ -602,9 +601,18 @@
                                     <div class="task_tag" style="background: #aa00ff; opacity: 0.3"></div>
                                 </div>
                                 <h3>Ensure every record to be safe in database</h3><hr>
-                                <div class="readmore" style="overflow-y: hidden">
+                                <div class="readmore" style="overflow-y: hidden; color: #000">
                                     <p>Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism</p>
                                 </div><hr>
+                                <fieldset class="view_milestones_fieldset">
+                                    <label class="view_milestones_legend">View Milestones</label>
+                                    <div class="view_milestones_div" style="display:none" >
+                                        <ul style="list-style: none">
+                                            <li>milestone 1</li>
+                                            <li>milestone 2</li>
+                                        </ul>
+                                    </div>
+                                </fieldset>
                                 <div style="display: flex">
                                     <div style="display: flex">
                                         <label>Assigned by : </label>
@@ -619,7 +627,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h1 class="white-text text-center">Currently Working on</h1>
+                        <h3 class="white-text text-center">Currently Working</h3>
                         <div id="current_tasks" class="cards_holder" style="height: 500px">
                             <div class="card hoverable white">
                                 <h1>hello</h1>
@@ -627,7 +635,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h1 class="white-text text-center">Completed </h1>
+                        <h3 class="white-text text-center">Completed </h3>
                         <div id="completed_tasks" class="cards_holder"  style="height: 500px">
                             <div class="card hoverable white">
                                 <h1>hello</h1>
@@ -638,6 +646,7 @@
             </div>
         </div>
     </div>
+</div>
     <script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
@@ -784,6 +793,10 @@
                 $(this).addClass("active_task_tag");
                 $(this).css({'opacity': 1});
             }
+        });
+
+        $('.view_milestones_fieldset').click(function (e) {
+            $(this).find('.view_milestones_div').toggle();
         });
 
     });

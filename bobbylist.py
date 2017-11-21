@@ -11,7 +11,7 @@ counter = Value('i', 0)
 app = Flask(__name__, static_path='/static')
 Triangle(app)
 
-
+app.static_folder = 'static'
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT = 587,
