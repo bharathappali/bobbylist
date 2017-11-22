@@ -481,18 +481,53 @@
             cursor: pointer;
         }
 
+        .tags_main {
+            display: flex;
+            align-items: stretch; /* Default */
+            justify-content: space-between;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tags_main_sub {
+            display: block;
+            flex: 0 1 auto;
+            cursor: pointer;
+        }
+
+        .task_tag_main_start {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+        }
+
+        .task_tag_main_current {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+        }
+
+        .task_tag_main_completed {
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+        }
+
         .task_tags_holder > .task_tag {
             margin-left: 4px;
         }
 
         .view_milestones_fieldset {
             border: 1px solid #514A9D;
+            padding-left: 10px;
+            border-radius: 5px;
         }
 
     </style>
 </head>
 <body style="font-family: 'HelveticaNeueThin'">
-    <div class="full-bg-img dualcolorbackground" style="overflow-y: scroll;">
+    <div class="full-bg-img dualcolorbackground">
     <nav class="navbar navbar-expand-sm fixed-top" style="margin-bottom: 0px;position: fixed;width: 100%;">
         <!-- Search Box-->
         <div class="search-box">
@@ -530,6 +565,9 @@
             </div>
         </div>
         <div class="mainpane">
+
+
+
             <div class="container-fluid" id="create_task_container" style="display: none;">
                 <form action="/dashboard/create_task" method="post">
                     <div class="col-lg-12">
@@ -589,61 +627,83 @@
                 </div>
             </form>
             </div>
+
+
+
             <div class="container-fluid" id="my_tasks_container">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" style="overflow: hidden">
                         <h3 class="white-text text-center">To be Started</h3>
-                        <div id="about_to_start_task" class="cards_holder" style="height: 500px">
-                            <div class="card hoverable white" style="padding: 10px">
-                                <div class="task_tags_holder">
-                                    <div class="task_tag" style="background: #ffa000; opacity: 0.3"></div>
-                                    <div class="task_tag" style="background: #00C853; opacity: 0.3"></div>
-                                    <div class="task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                </div>
-                                <h3>Ensure every record to be safe in database</h3><hr>
-                                <div class="readmore" style="overflow-y: hidden; color: #000">
-                                    <p>Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism</p>
-                                </div><hr>
-                                <fieldset class="view_milestones_fieldset">
-                                    <label class="view_milestones_legend">View Milestones</label>
-                                    <div class="view_milestones_div" style="display:none" >
-                                        <ul style="list-style: none">
-                                            <li>milestone 1</li>
-                                            <li>milestone 2</li>
-                                        </ul>
-                                    </div>
-                                </fieldset>
-                                <div style="display: flex">
-                                    <div style="display: flex">
-                                        <label>Assigned by : </label>
-                                        <img src="{{ url_for('static', filename="imgs/bobbylist_user.png") }}" class="rounded-circle" style="width: 25px;height: 25px;border-radius: 25px">
-                                        <label>BharathAppali</label>
-                                    </div>
-                                    <div style="flex: 1;text-align: right">
-                                        <label>51 days to go</label>
-                                    </div>
-                                </div>
+                        <div class="tags_main">
+                            <label id="tags_main_sub_all_start_task" style="color: #FFFFFF;cursor: pointer;">All</label>
+                            <div id="tags_main_sub_important_start_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_start" style="background: #ffa000;">
+                                </div><label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Important</label>
                             </div>
+                            <div id="tags_main_sub_average_start_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_start" style="background: #00C853;"></div>
+                                <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Average</label>
+                            </div>
+                            <div id="tags_main_sub_starter_start_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_start" style="background: #aa00ff;"></div>
+                                <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
+                            </div>
+                            <button class="temp_btn_start">add</button>
+                        </div>
+                        <div id="about_to_start_task" class="cards_holder" style="height: 500px;overflow-y: scroll;">
+                            
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" style="overflow: hidden">
                         <h3 class="white-text text-center">Currently Working</h3>
-                        <div id="current_tasks" class="cards_holder" style="height: 500px">
-                            <div class="card hoverable white">
-                                <h1>hello</h1>
+                        <div class="tags_main">
+                            <label id="tags_main_sub_all_current_task" style="color: #FFFFFF;cursor: pointer;">All</label>
+                            <div id="tags_main_sub_important_current_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_current" style="background: #ffa000;">
+                                </div><label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Important</label>
                             </div>
+                            <div id="tags_main_sub_average_current_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_current" style="background: #00C853;"></div>
+                                <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Average</label>
+                            </div>
+                            <div id="tags_main_sub_starter_current_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_current" style="background: #aa00ff;"></div>
+                                <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
+                            </div>
+                            <button class="temp_btn_current">add</button>
+                        </div>
+                        <div id="current_tasks" class="cards_holder" style="height: 500px;overflow-y: scroll">
+                            
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" style="overflow: hidden">
                         <h3 class="white-text text-center">Completed </h3>
-                        <div id="completed_tasks" class="cards_holder"  style="height: 500px">
-                            <div class="card hoverable white">
-                                <h1>hello</h1>
+                        <div class="tags_main">
+                            <label id="tags_main_sub_all_completed_task" style="color: #FFFFFF;cursor: pointer;">All</label>
+                            <div id="tags_main_sub_important_completed_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_start" style="background: #ffa000;">
+                                </div><label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Important</label>
                             </div>
+                            <div id="tags_main_sub_average_completed_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_start" style="background: #00C853;"></div>
+                                <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Average</label>
+                            </div>
+                            <div id="tags_main_sub_starter_completed_task" class="tags_main_sub" style="display: flex;">
+                                <div class="task_tag_main_comleted" style="background: #aa00ff;"></div>
+                                <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
+                            </div>
+                            <button class="temp_btn_completed">add</button>
+                        </div>
+                        <div id="completed_tasks" class="cards_holder"  style="height: 500px;overflow-y: scroll;">
+                            
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
         </div>
     </div>
 </div>
@@ -663,6 +723,7 @@
 
             console.log("asd");
           }).on('drop', function (el) {
+            // $(el).find('.current_pos').text($(el).closest('.cards_holder').attr("id"));
             console.log($(el).closest('.cards_holder').attr("id"));
           }).on('over', function (el, container) {
             console.log("over");
@@ -785,19 +846,204 @@
         var timeinmilisec = date_to_reply.getTime() - today.getTime();
         // alert( Math.ceil(timeinmilisec / (1000 * 60 * 60 * 24)) );
 
-        $('.task_tag').click(function () {
+        $('.cards_holder').on('click','.task_tag',function () {
             if($(this).hasClass("active_task_tag")){
                 $(this).removeClass("active_task_tag");
                 $(this).css({'opacity': 0.3});
             } else{
+                $(this).parent().children().removeClass("active_task_tag")
+                $(this).parent().children().css({'opacity': 0.3});
                 $(this).addClass("active_task_tag");
                 $(this).css({'opacity': 1});
             }
         });
+        // start task scripts
+        
+        $('#tags_main_sub_important_start_task').click(function(){
+            var imp_nodes = [];
+            $('#about_to_start_task').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("important")) {
+                    imp_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < imp_nodes.length ; i++) {
+                imp_nodes[i].show();
+            }
+        });
 
-        $('.view_milestones_fieldset').click(function (e) {
+        $('#tags_main_sub_average_start_task').click(function(){
+            var avg_nodes = [];
+            $('#about_to_start_task').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("average")) {
+                    avg_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < avg_nodes.length ; i++) {
+                avg_nodes[i].show();
+            }
+        });
+
+        $('#tags_main_sub_starter_start_task').click(function(){
+            var srt_nodes = [];
+            $('#about_to_start_task').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("starter")) {
+                    srt_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < srt_nodes.length ; i++) {
+                srt_nodes[i].show();
+            }
+        });
+
+
+        $('#tags_main_sub_all_start_task').click(function () {
+             $('#about_to_start_task').find('.card').each(function(){
+                $(this).show();
+             });
+        });
+
+        $('.temp_btn_start').click(function(){
+            $('#about_to_start_task').prepend('<div class="card hoverable white" style="padding: 10px;margin-bottom: 5px"> <div class="task_tags_holder"> <div class="important task_tag" style="background: #ffa000; opacity: 0.3"></div><div class="average task_tag" style="background: #00C853; opacity: 0.3"></div><div class="starter task_tag" style="background: #aa00ff; opacity: 0.3"></div></div><h3>Ensure every record to be safe in database</h3><hr> <div class="readmore" style="overflow-y: hidden; color: #000"> <p>Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism</p></div><label style="padding: 5px 10px 5px 10px; border-radius: 50px; border: 1px solid #514A9D">Due by : 2018-07-10</label><hr> <fieldset class="view_milestones_fieldset"> <label class="view_milestones_legend" style="cursor: pointer;">View Milestones</label> <div class="view_milestones_div" style="display:none" > <ul style="list-style: none"> <li>milestone 1</li><li>milestone 2</li></ul> </div></fieldset> <div style="display: flex;margin-top: 5px"> <div style="display: flex"> <label>Assigned by : </label> <img src="{{url_for('static', filename="imgs/bobbylist_user.png")}}" class="rounded-circle" style="width: 25px;height: 25px;border-radius: 25px"> <label>BharathAppali</label> </div><div style="flex: 1;text-align: right"> <label>51 days to go</label> </div></label></div></div>');
+
+            $('.readmore').readmore({
+                  speed: 1000,
+                  collapsedHeight: lineHeight * numLines,
+                  heightMargin: lineHeight * 1
+            });
+        });
+
+        // start task scripts ends here
+
+        // currents tasks scripts starts here
+
+        $('#tags_main_sub_important_current_task').click(function(){
+            var imp_nodes = [];
+            $('#current_tasks').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("important")) {
+                    imp_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < imp_nodes.length ; i++) {
+                imp_nodes[i].show();
+            }
+        });
+
+        $('#tags_main_sub_average_current_task').click(function(){
+            var avg_nodes = [];
+            $('#current_tasks').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("average")) {
+                    avg_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < avg_nodes.length ; i++) {
+                avg_nodes[i].show();
+            }
+        });
+
+        $('#tags_main_sub_starter_current_task').click(function(){
+            var srt_nodes = [];
+            $('#current_tasks').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("starter")) {
+                    srt_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < srt_nodes.length ; i++) {
+                srt_nodes[i].show();
+            }
+        });
+
+
+        $('#tags_main_sub_all_current_task').click(function () {
+             $('#current_tasks').find('.card').each(function(){
+                $(this).show();
+             });
+        });
+
+        $('.temp_btn_current').click(function(){
+            $('#current_tasks').prepend('<div class="card hoverable white" style="padding: 10px;margin-bottom: 5px"> <div class="task_tags_holder"> <div class="important task_tag" style="background: #ffa000; opacity: 0.3"></div><div class="average task_tag" style="background: #00C853; opacity: 0.3"></div><div class="starter task_tag" style="background: #aa00ff; opacity: 0.3"></div></div><h3>Ensure every record to be safe in database</h3><hr> <div class="readmore" style="overflow-y: hidden; color: #000"> <p>Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism</p></div><label style="padding: 5px 10px 5px 10px; border-radius: 50px; border: 1px solid #514A9D">Due by : 2018-07-10</label><hr> <fieldset class="view_milestones_fieldset"> <label class="view_milestones_legend" style="cursor: pointer;">View Milestones</label> <div class="view_milestones_div" style="display:none" > <ul style="list-style: none"> <li>milestone 1</li><li>milestone 2</li></ul> </div></fieldset> <div style="display: flex;margin-top: 5px"> <div style="display: flex"> <label>Assigned by : </label> <img src="{{url_for('static', filename="imgs/bobbylist_user.png")}}" class="rounded-circle" style="width: 25px;height: 25px;border-radius: 25px"> <label>BharathAppali</label> </div><div style="flex: 1;text-align: right"> <label>51 days to go</label> </div></div></div>');
+
+            $('.readmore').readmore({
+                  speed: 1000,
+                  collapsedHeight: lineHeight * numLines,
+                  heightMargin: lineHeight * 1
+            });
+        });
+
+
+        // current tasks scripts ends here
+
+        // completed tasks scripts starts here
+
+        $('#tags_main_sub_important_completed_task').click(function(){
+            var imp_nodes = [];
+            $('#completed_tasks').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("important")) {
+                    imp_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < imp_nodes.length ; i++) {
+                imp_nodes[i].show();
+            }
+        });
+
+        $('#tags_main_sub_average_completed_task').click(function(){
+            var avg_nodes = [];
+            $('#completed_tasks').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("average")) {
+                    avg_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < avg_nodes.length ; i++) {
+                avg_nodes[i].show();
+            }
+        });
+
+        $('#tags_main_sub_starter_completed_task').click(function(){
+            var srt_nodes = [];
+            $('#completed_tasks').find('.task_tag').each(function(){
+                if($(this).hasClass("active_task_tag") && $(this).hasClass("starter")) {
+                    srt_nodes.push($(this).parent().closest('.card'));
+                }
+                $(this).parent().closest('.card').hide();
+            });
+            for(i = 0 ; i < srt_nodes.length ; i++) {
+                srt_nodes[i].show();
+            }
+        });
+
+
+        $('#tags_main_sub_all_completed_task').click(function () {
+             $('#completed_tasks').find('.card').each(function(){
+                $(this).show();
+             });
+        });
+
+        $('.temp_btn_completed').click(function(){
+            $('#completed_tasks').prepend('<div class="card hoverable white" style="padding: 10px;margin-bottom: 5px"> <div class="task_tags_holder"> <div class="important task_tag" style="background: #ffa000; opacity: 0.3"></div><div class="average task_tag" style="background: #00C853; opacity: 0.3"></div><div class="starter task_tag" style="background: #aa00ff; opacity: 0.3"></div></div><h3>Ensure every record to be safe in database</h3><hr> <div class="readmore" style="overflow-y: hidden; color: #000"> <p>Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism. Create a stage application to check whether every record is safe in database, If not make it safe with a firewall transaction mechanism</p></div><label style="padding: 5px 10px 5px 10px; border-radius: 50px; border: 1px solid #514A9D">Due by : 2018-07-10</label><hr> <fieldset class="view_milestones_fieldset"> <label class="view_milestones_legend" style="cursor: pointer;">View Milestones</label> <div class="view_milestones_div" style="display:none" > <ul style="list-style: none"> <li>milestone 1</li><li>milestone 2</li></ul> </div></fieldset> <div style="display: flex;margin-top: 5px"> <div style="display: flex"> <label>Assigned by : </label> <img src="{{url_for('static', filename="imgs/bobbylist_user.png")}}" class="rounded-circle" style="width: 25px;height: 25px;border-radius: 25px"> <label>BharathAppali</label> </div><div style="flex: 1;text-align: right"> <label>51 days to go</label> </div></div></div>');
+
+            $('.readmore').readmore({
+                  speed: 1000,
+                  collapsedHeight: lineHeight * numLines,
+                  heightMargin: lineHeight * 1
+            });
+        });
+
+        // completed tasks scripts ends here
+
+
+        $('.cards_holder').on('click', '.view_milestones_fieldset',function (e) {
             $(this).find('.view_milestones_div').toggle();
         });
+
+        
 
     });
 </script>
