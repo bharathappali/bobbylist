@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="col-lg-12">
-        <form action="/user_creation" method="post">
+        <form action="/user_creation" method="post" enctype=multipart/form-data>
             <input type="hidden" name="emailinput" value="{{ user_email }}">
             <div id="firstnamediv" style="text-align: center;color: #514A9D">
                 <h4 id="firstnameh5">Whats your First Name ?</h4>
@@ -103,7 +103,7 @@
                 <div class="md-form"  style="text-align: center">
                     <div class="fileUpload btn" id="uploadbtn">
                         <span style="color: #514A9D">Upload image*</span>
-                        <input type="file" id="uploadfile" accept=".jpg,.jpeg,.png" name="uploadfile" class="upload" required/>
+                        <input type="file" id="uploadfile" accept=".jpg" name="uploadfile" class="upload" required/>
                     </div>
                 </div>
                 <Button type="submit" id="startbtn" class="btn dualcolorbackground" style="border-radius: 5px">Go To Dashboard</Button>
@@ -171,6 +171,9 @@
                 }else{
                     $('#erroremail').text("Only 15 characters allowed");
                 }
+                return false;
+            }
+            if(e.which === 32){
                 return false;
             }
         });

@@ -524,6 +524,20 @@
             border-radius: 5px;
         }
 
+        .assignpeople_list {
+            margin-top: 2px;
+            cursor: pointer;
+            padding: 3px 0px 3px 0px;
+            opacity: 0.6;
+            background: #514A9D;
+            color: #FFFFFF;
+        }
+
+        .assignpeople_list:hover {
+            background: #FFFFFF;
+            color: #514A9D;
+        }
+
     </style>
 </head>
 <body style="font-family: 'HelveticaNeueThin'">
@@ -552,9 +566,9 @@
     <div class="container-fluid" style="display: flex">
         <div class="sidebar">
             <div class="col-lg-12" style="display: flex">
-                <img src="{{ url_for('static', filename='imgs/bobbylist_user.png') }}" class="rounded-circle" height="70px" width="70px">
+                <img src="{{ user_details['img'] }}" class="rounded-circle" height="70px" width="70px">
                 <div style="padding-left: 15px;padding-top: 10px">
-                    <label>Bharath Appali</label><br>
+                    <label>{{ user_details['username'] }}</label><br>
                     <p id="greetings_label">Have a great day :)</p>
                 </div>
             </div>
@@ -562,8 +576,70 @@
                 <label class="col-lg-12" style="font-size: large;color: #514A9D" id="create_task_sidebar_label"><i class="fa fa-pencil fa-1x"></i> Create Task</label>
                 <label class="col-lg-12" style="font-size: large;color: #514A9D" id="calendar_sidebar_label"><i class="fa fa-calendar fa-1x"></i> Calendar</label>
                 <label class="col-lg-12" style="font-size: large;color: #514A9D" id="my_tasks_sidebar_label"><i class="fa fa-calendar-check-o fa-1x"></i> My Tasks</label>
+                <label class="col-lg-12" style="font-size: large;color: #514A9D" id="add_people_sidebar_label" data-toggle="modal" data-target="#addpeoplemodal"><i class="fa fa-user-plus fa-1x"></i>Add People</label>
+            </div>
+            <div class="col-lg-12">
+                <div style="width: 100%;height: 1px;background: #514A9D"></div>
             </div>
         </div>
+        <!-- Modal -->
+<div class="modal fade" id="addpeoplemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 15%">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add People</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+                    <span aria-hidden="true"><i class="fa fa-close red-text"></i> </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">Enter email of the person to invite</h3>
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="hidden" name="added_by_input" value="{{ session['email'] }}">
+                        <input class="form-control" type="email" id="add_people_input" name="add_people_input">
+                        <label for="add_people_input">Email</label>
+                    </div>
+                    <div class="md-form text-center">
+                        <input type="submit" class="btn btn-primary" id="add_people_btn" value="Invite">
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal fade" id="assignpeoplemodal" tabindex="-1" role="dialog" aria-labelledby="assignpeoplemodallabel" aria-hidden="true" style="margin-top: 5%">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Assign a Person</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+                            <span aria-hidden="true"><i class="fa fa-close red-text"></i> </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8" style="height: 400px;overflow-y: scroll">
+                                <div class="assignpeople_list col-md-12">
+                                     <div class="col-md-4">
+                                         <img src="{{ url_for('static', filename="imgs/bobbylist_user.png") }}" style="width: 50px;height: 50px;border-radius: 50px">
+                                     </div>
+                                     <div class="col-md-8">
+                                         <h5>BharathAppali</h5>
+                                         <label>bharath.appali@gmail.com</label>
+                                     </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="mainpane">
 
 
@@ -586,10 +662,12 @@
                                 </label>
                                 <h3 style="margin-top: 0px">Assign task</h3>
                             </div>
-                            <div class="md-form" id="assignee_div" style="display: none">
-                                <i class="fa fa-user prefix grey-text"></i>
-                                <input type="text" id="task_assignee" class="form-control form_non_calendar">
-                                <label for="task_assignee">Assign To *</label>
+                            <input type="hidden" id="task_assignee" name="task_assignee" value="{{ session['email'] }}">
+                            <div class="text-center">
+                                <label id="assignee_label">Assigned to <span id="assignee_span">{{ session['email']  }}</span></label>
+                                <input type="hidden" id="task_assigned_by" name="task_assigned_by" value="{{ session['email'] }}">
+                                <input type="hidden" id="task_creation_date" name="task_creation_date">
+                                <input type="hidden" id="task_due_date" name="task_due_date">
                             </div>
                             <div class="md-form">
                                 <i class="fa fa-list prefix grey-text"></i>
@@ -650,7 +728,7 @@
                             </div>
                             <button class="temp_btn_start">add</button>
                         </div>
-                        <div id="about_to_start_task" class="cards_holder" style="height: 500px;overflow-y: scroll;">
+                        <div id="about_to_start_task" class="cards_holder" style="height: 600px;overflow-y: scroll;">
                             
                         </div>
                     </div>
@@ -672,7 +750,7 @@
                             </div>
                             <button class="temp_btn_current">add</button>
                         </div>
-                        <div id="current_tasks" class="cards_holder" style="height: 500px;overflow-y: scroll">
+                        <div id="current_tasks" class="cards_holder" style="height: 600px;overflow-y: scroll">
                             
                         </div>
                     </div>
@@ -681,29 +759,25 @@
                         <div class="tags_main">
                             <label id="tags_main_sub_all_completed_task" style="color: #FFFFFF;cursor: pointer;">All</label>
                             <div id="tags_main_sub_important_completed_task" class="tags_main_sub" style="display: flex;">
-                                <div class="task_tag_main_start" style="background: #ffa000;">
+                                <div class="task_tag_main_completed" style="background: #ffa000;">
                                 </div><label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Important</label>
                             </div>
                             <div id="tags_main_sub_average_completed_task" class="tags_main_sub" style="display: flex;">
-                                <div class="task_tag_main_start" style="background: #00C853;"></div>
+                                <div class="task_tag_main_completed" style="background: #00C853;"></div>
                                 <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Average</label>
                             </div>
                             <div id="tags_main_sub_starter_completed_task" class="tags_main_sub" style="display: flex;">
-                                <div class="task_tag_main_comleted" style="background: #aa00ff;"></div>
+                                <div class="task_tag_main_completed" style="background: #aa00ff;"></div>
                                 <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
                             </div>
                             <button class="temp_btn_completed">add</button>
                         </div>
-                        <div id="completed_tasks" class="cards_holder"  style="height: 500px;overflow-y: scroll;">
+                        <div id="completed_tasks" class="cards_holder"  style="height: 600px;overflow-y: scroll;">
                             
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
 </div>
@@ -720,7 +794,6 @@
     $(function () {
         dragula([document.getElementById("about_to_start_task"), document.getElementById("current_tasks"), document.getElementById("completed_tasks")])
             .on('drag', function (el) {
-
             console.log("asd");
           }).on('drop', function (el) {
             // $(el).find('.current_pos').text($(el).closest('.cards_holder').attr("id"));
@@ -791,10 +864,9 @@
         });
         $('.checkbox_task').change(function () {
             if(this.checked) {
-                $('#assignee_div').show();
+                $('#assignpeoplemodal').modal('show');
             }else{
-                $('#assignee_div').hide();
-                $('#task_assignee').val("{{ session['email'] }}");
+                $('#assignpeoplemodal').modal('hide');
             }
         });
         $('.form_non_calendar').on('keypress', function (e) {
@@ -1043,8 +1115,24 @@
             $(this).find('.view_milestones_div').toggle();
         });
 
-        
+        $('.assignpeople_list').click(function () {
+            $('#task_assignee').val('bharathappali');
+            $('#assignee_span').text('bharathappali');
+            $('#assignpeoplemodal').modal('hide');
+        });
 
+        $('#add_people_btn').click(function () {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if($('#add_people_input').val().trim().length > 0 && re.test($('#add_people_input').val())) {
+                alert("posting");
+                $.ajax({
+                  type: 'POST',
+                  url: "{{ url_for('invite_people') }}",contentType: 'application/json;charset=UTF-8',
+                  data: {'add_people_input': $('#add_people_input').val()},
+                  success: function(resultData) { alert("mail successfully sent")}
+                });
+            }
+        });
     });
 </script>
 </body>

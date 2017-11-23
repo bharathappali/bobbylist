@@ -37,15 +37,15 @@
                 <label>Have an Account ? <i class="fa fa-sign-in prefix black-text" style="margin-top: 7px"></i><span class="pointer-cursor" id="login-switcher" style="color: #514A9D;cursor: pointer;"> Login </span> </label>
             </div>
             <div class="card white hoverable" id="login-div" style="padding: 20px 20px 20px 20px;border-top: 5px solid #388E3C">
-                <form action="/login" method="post">
+                <form action="{{ url_for('login') }}" method="post">
                     <div class="md-form" style="text-align: left">
                         <i class="fa fa-user prefix fa-3x grey-text" style="margin-top: 7px"></i>
-                        <input type="email" class="form-control" id="login_email">
+                        <input type="email" class="form-control" id="login_email" name="login_email">
                         <label for="login_email">Email</label>
                     </div>
                     <div class="md-form" style="text-align: left">
                         <i class="fa fa-lock prefix fa-3x grey-text" style="margin-top: 7px"></i>
-                        <input type="password" class="form-control" id="login_password">
+                        <input type="password" class="form-control" id="login_password" name="login_password">
                         <label for="login_password">Password</label>
                     </div>
                     <div class="md-form">
