@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 from pymongo import MongoClient
 from multiprocessing import Value
+import json
 
 
 counter = Value('i', 0)
@@ -60,6 +61,20 @@ def login():
             session['email'] = user_db['email']
             session['img'] = user_db['img']
             session['username'] = user_db['username']
+            people_list = []
+            people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
+            if people_list_db is not None:
+                print  people_list_db
+                print people_list_db['people']
+                if len(people_list_db['people']) > 0:
+                    for person in people_list_db['people']:
+                        people_dict = {}
+                        person_db = bobbylistdb.users.find_one({"email": person},{"_id": 0})
+                        if(person_db is not None):
+                            people_dict['img'] = person_db['img']
+                            people_dict['username'] = person_db['username']
+                            people_dict['email'] = person_db['email']
+                            people_list.append(people_dict)
             tasks_start_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "start"}, {"_id": 0})
             tasks_current_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "current"},
                                                       {"_id": 0})
@@ -67,7 +82,7 @@ def login():
                                                         {"_id": 0})
             return render_template("dashboard.html", newuser=False, user_details=user_db,
                                    tasks_start_details=tasks_start_db, tasks_current_details=tasks_current_db,
-                                   tasks_completed_details=tasks_completed_db)
+                                   tasks_completed_details=tasks_completed_db, people_details = people_list)
         return render_template("index.html")
 
 @app.route('/signup', methods=['GET','POST'])
@@ -127,16 +142,21 @@ def create_user():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(dirname(realpath(__file__))+app.config['UPLOAD_FOLDER'] , signup_dict['username'] + '.jpg'))
                 signup_dict['img'] = app.config['UPLOAD_FOLDER'] + '/' + signup_dict['username'] + '.jpg'
+        print signup_dict
         bobbylistdb.users.insert(signup_dict)
         bobbylistdb.email_verification.update({"_id": user_verify_table_record['_id']}, {"$set": {'checked': True}})
         user_db = bobbylistdb.users.find_one({"email": signup_dict['email']}, {"_id": 0})
-        return render_template("dashboard.html", newuser=True, user_details = user_db, people_details= None)
+        session['email'] = signup_dict['email']
+        session['username'] = signup_dict['username']
+        session['img'] = signup_dict['img']
+        return render_template("dashboard.html", newuser=True, user_details = user_db, people_details= None, tasks_start_details = None, tasks_current_details = None, tasks_completed_details = None)
 
 @app.route('/dashboard/create_task',  methods=['GET','POST'])
 def create_task():
     if request.method == 'GET':
         return render_template("index.html")
     if request.method == 'POST':
+        print request.form
         with counter.get_lock():
             counter.value += 1
         task_dict = {}
@@ -162,18 +182,24 @@ def create_task():
         tasks_start_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "start"}, {"_id": 0})
         tasks_current_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "current"}, {"_id": 0})
         tasks_completed_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "completed"}, {"_id": 0})
-        return render_template("dashboard.html", newuser=False, people_list=people_db, user_details = user_db, tasks_start_details = tasks_start_db, tasks_current_details = tasks_current_db, tasks_completed_details = tasks_completed_db )
+        return render_template("dashboard.html", newuser=False, people_details=people_db, user_details = user_db, tasks_start_details = tasks_start_db, tasks_current_details = tasks_current_db, tasks_completed_details = tasks_completed_db )
 
 @app.route('/dashboard/invite_people', methods=['GET', 'POST'])
 def invite_people():
     if request.method == 'GET':
         return render_template("index.html")
     if request.method == 'POST':
-        added_people = request.data['add_people_input']
+        added_people = request.json['add_people_input']
         userdb = bobbylistdb.users.find_one({"email": session['email']})
-        people_list_user = userdb['people']
-        people_list_user.append(added_people)
-        bobbylistdb.users.update({"_id": userdb['_id']}, {"$set": {'people': people_list_user}})
+        if userdb is not None:
+            people_list_user = userdb['people']
+            if len(people_list_user) > 0:
+                if added_people not in people_list_user:
+                    people_list_user.append(added_people)
+                    bobbylistdb.users.update({"_id": userdb['_id']}, {"$set": {'people': people_list_user}})
+            else:
+                people_list_user.append(added_people)
+                bobbylistdb.users.update({"_id": userdb['_id']}, {"$set": {'people': people_list_user}})
         receipients = []
         receipients.append(added_people)
         send_mail(receipients, session['email'] + ' has added you to his/her bobbylist contacts.', session['email']+' asks you to Join/Login http://www.bobbylist.com to view your pending tasks')
@@ -187,7 +213,7 @@ def change_task_status():
         task_id = request.json['task_id']
         task_status = request.json['task_status']
         bobbylistdb.tasks.update({"task_id": task_id}, {"$set": {'status': task_status}})
-        return True
+        return ""
 
 
 
