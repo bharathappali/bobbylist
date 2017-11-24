@@ -215,6 +215,16 @@ def change_task_status():
         bobbylistdb.tasks.update({"task_id": task_id}, {"$set": {'status': task_status}})
         return ""
 
+@app.route('/dashboard/change_task_tag', methods=['GET', 'POST'])
+def change_task_tag():
+    if request.method == 'GET':
+        return render_template("index.html")
+    if request.method == 'POST':
+        task_id = request.json['task_id']
+        task_tag = request.json['task_tag']
+        bobbylistdb.tasks.update({"task_id": task_id}, {"$set": {'tag': task_tag}})
+        return ""
+
 
 
 if __name__ == '__main__':

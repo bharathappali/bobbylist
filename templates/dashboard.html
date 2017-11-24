@@ -737,19 +737,21 @@
                                 <div class="{{ task['task_id'] }} card hoverable white" style="padding: 10px;margin-bottom: 5px">
                                     <div class="task_tags_holder">
                                         {% if task['tag'] == 'important' %}
-                                        <div class="{{ task['task_id'] }} active_task_tag important task_tag" style="background: #ffa000; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} important task_tag active_task_tag" style="background: #ffa000; opacity: 1"></div>
                                         <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
                                         <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                        {% endif %}
-                                        {% if task['tag'] == 'average' %}
+                                        {% elif task['tag'] == 'average' %}
                                         <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
-                                        <div class="{{ task['task_id'] }} active_task_tag average task_tag" style="background: #00C853; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} average task_tag active_task_tag" style="background: #00C853; opacity: 1"></div>
                                         <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                        {% endif %}
-                                        {% if task['tag'] == 'starter' %}
+                                        {% elif task['tag'] == 'starter' %}
                                         <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
                                         <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
-                                        <div class="{{ task['task_id'] }} active_task_tag starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} starter task_tag active_task_tag" style="background: #aa00ff; opacity: 1"></div>
+                                        {% else %}
+                                        <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
                                         {% endif %}
                                     </div>
                                     <h3>{{ task['task_title'] }}</h3>
@@ -812,19 +814,21 @@
                                 <div class="{{ task['task_id'] }} card hoverable white" style="padding: 10px;margin-bottom: 5px">
                                     <div class="task_tags_holder">
                                         {% if task['tag'] == 'important' %}
-                                        <div class="{{ task['task_id'] }} active_task_tag important task_tag" style="background: #ffa000; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} important task_tag active_task_tag" style="background: #ffa000; opacity: 1"></div>
                                         <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
                                         <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                        {% endif %}
-                                        {% if task['tag'] == 'average' %}
+                                        {% elif task['tag'] == 'average' %}
                                         <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
-                                        <div class="{{ task['task_id'] }} active_task_tag average task_tag" style="background: #00C853; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} average task_tag active_task_tag" style="background: #00C853; opacity: 1"></div>
                                         <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                        {% endif %}
-                                        {% if task['tag'] == 'starter' %}
+                                        {% elif task['tag'] == 'starter' %}
                                         <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
                                         <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
-                                        <div class="{{ task['task_id'] }} active_task_tag starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} starter task_tag active_task_tag" style="background: #aa00ff; opacity: 1"></div>
+                                        {% else %}
+                                        <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
                                         {% endif %}
                                     </div>
                                     <h3>{{ task['task_title'] }}</h3>
@@ -887,19 +891,21 @@
                                 <div class="{{ task['task_id'] }} card hoverable white" style="padding: 10px;margin-bottom: 5px">
                                     <div class="task_tags_holder">
                                         {% if task['tag'] == 'important' %}
-                                        <div class="{{ task['task_id'] }} active_task_tag important task_tag" style="background: #ffa000; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} important task_tag active_task_tag" style="background: #ffa000; opacity: 1"></div>
                                         <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
                                         <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                        {% endif %}
-                                        {% if task['tag'] == 'average' %}
+                                        {% elif task['tag'] == 'average' %}
                                         <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
-                                        <div class="{{ task['task_id'] }} active_task_tag average task_tag" style="background: #00C853; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} average task_tag active_task_tag" style="background: #00C853; opacity: 1"></div>
                                         <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
-                                        {% endif %}
-                                        {% if task['tag'] == 'starter' %}
+                                        {% elif task['tag'] == 'starter' %}
                                         <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
                                         <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
-                                        <div class="{{ task['task_id'] }} active_task_tag starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} starter task_tag active_task_tag" style="background: #aa00ff; opacity: 1"></div>
+                                        {% else %}
+                                        <div class="{{ task['task_id'] }} important task_tag" style="background: #ffa000; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} average task_tag" style="background: #00C853; opacity: 0.3"></div>
+                                        <div class="{{ task['task_id'] }} starter task_tag" style="background: #aa00ff; opacity: 0.3"></div>
                                         {% endif %}
                                     </div>
                                     <h3>{{ task['task_title'] }}</h3>
@@ -1137,6 +1143,19 @@
                 $(this).parent().children().css({'opacity': 0.3});
                 $(this).addClass("active_task_tag");
                 $(this).css({'opacity': 1});
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url_for('change_task_tag') }}",
+                    dataType: "json",
+                    data: JSON.stringify({
+                      'task_id': $(this).attr('class').split(" ")[0],
+                        'task_tag' : $(this).attr('class').split(" ")[1]
+                    }),
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function(resultData) {
+
+                    }
+                });
             }
         });
         // start task scripts
