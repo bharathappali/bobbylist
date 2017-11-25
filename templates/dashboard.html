@@ -555,7 +555,7 @@
             <div id="navbar-right-options" style="float: right;height: 100%">
 {#                <i class="fa fa-search fa-2x" id="search"></i>#}
 {#                <i class="fa fa-bell-o fa-2x"></i><span class="badge red">12</span>#}
-                <label style="font-size: large">logout</label>
+                <a href="{{ url_for('logout') }}"><label style="font-size: large">logout</label></a>
             </div>
         </div>
     </nav>
@@ -729,7 +729,7 @@
                                 <div class="task_tag_main_start" style="background: #aa00ff;"></div>
                                 <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
                             </div>
-                            <button class="temp_btn_start">add</button>
+{#                            <button class="temp_btn_start">add</button>#}
                         </div>
                         <div id="about_to_start_task" class="cards_holder" style="height: 600px;overflow-y: scroll;">
                         {% if tasks_start_details is not none %}
@@ -806,7 +806,7 @@
                                 <div class="task_tag_main_current" style="background: #aa00ff;"></div>
                                 <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
                             </div>
-                            <button class="temp_btn_current">add</button>
+{#                            <button class="temp_btn_current">add</button>#}
                         </div>
                         <div id="current_tasks" class="cards_holder" style="height: 600px;overflow-y: scroll">
                             {% if tasks_current_details is not none %}
@@ -883,7 +883,7 @@
                                 <div class="task_tag_main_completed" style="background: #aa00ff;"></div>
                                 <label style="color: #FFFFFF;margin-left: 2px;cursor: pointer;">Starter</label>
                             </div>
-                            <button class="temp_btn_completed">add</button>
+{#                            <button class="temp_btn_completed">add</button>#}
                         </div>
                         <div id="completed_tasks" class="cards_holder"  style="height: 600px;overflow-y: scroll;">
                             {% if tasks_completed_details is not none %}
