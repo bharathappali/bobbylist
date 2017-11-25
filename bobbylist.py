@@ -53,8 +53,6 @@ def initiate_launch():
             people_list = []
             people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
             if people_list_db is not None:
-                print  people_list_db
-                print people_list_db['people']
                 if len(people_list_db['people']) > 0:
                     for person in people_list_db['people']:
                         people_dict = {}
@@ -86,8 +84,6 @@ def login():
                 people_list = []
                 people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
                 if people_list_db is not None:
-                    print  people_list_db
-                    print people_list_db['people']
                     if len(people_list_db['people']) > 0:
                         for person in people_list_db['people']:
                             people_dict = {}
@@ -122,8 +118,6 @@ def login():
             people_list = []
             people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
             if people_list_db is not None:
-                print  people_list_db
-                print people_list_db['people']
                 if len(people_list_db['people']) > 0:
                     for person in people_list_db['people']:
                         people_dict = {}
@@ -184,8 +178,6 @@ def create_user():
                 people_list = []
                 people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
                 if people_list_db is not None:
-                    print  people_list_db
-                    print people_list_db['people']
                     if len(people_list_db['people']) > 0:
                         for person in people_list_db['people']:
                             people_dict = {}
@@ -239,8 +231,6 @@ def create_user():
         people_list = []
         people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
         if people_list_db is not None:
-            print  people_list_db
-            print people_list_db['people']
             if len(people_list_db['people']) > 0:
                 for person in people_list_db['people']:
                     people_dict = {}
@@ -264,7 +254,6 @@ def create_task():
     if request.method == 'GET':
         return render_template("index.html")
     if request.method == 'POST':
-        print request.form
         with counter.get_lock():
             counter.value += 1
         task_dict = {}
