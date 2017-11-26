@@ -14,6 +14,7 @@ import json
 counter = Value('i', 0)
 
 app = Flask(__name__, static_path='/static')
+app.secret_key = 'tonystark'
 Triangle(app)
 
 app.static_folder = 'static'
@@ -26,7 +27,7 @@ app.config.update(
     MAIL_PASSWORD = 'BobbylistBobbylistnoreplynoreply'
 )
 
-mongo_client = MongoClient(host='localhost',port=27017)
+mongo_client = MongoClient(host='127.0.0.1',port=27017, connect=False)
 bobbylistdb = mongo_client['bobbylist']
 
 UPLOAD_FOLDER = '/static/imgs/users'
@@ -333,7 +334,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'tonystark'
     app.config['SESSION_TYPE'] = 'filesystem'
-    # app.config['MONGO_CONNECT'] = False
     app.run(host="0.0.0.0")
