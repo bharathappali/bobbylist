@@ -142,7 +142,6 @@ def signup():
     if request.method == 'GET':
         return render_template("index.html")
     if request.method == 'POST':
-        print "bharath bharath"
         signup_email = request.form['signup_email']
         signup_password = request.form['signup_password']
         hashemail = hashlib.sha256(signup_email.encode('utf-8')).hexdigest()
@@ -155,6 +154,7 @@ def signup():
         recepients = []
         recepients.append(signup_email)
         send_mail(recepients,'Your activation link', "Please click on this link http://www.bobbylist.com/confirm/"+hashemail)
+        print "mail sent"
         if bobbylistdb.email_verification.find_one({"hashemail":hashemail},{"_id":0}) == None:
             bobbylistdb.email_verification.insert(verfication_hash_dict)
         else:
