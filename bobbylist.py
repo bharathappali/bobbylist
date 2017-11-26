@@ -142,6 +142,7 @@ def signup():
     if request.method == 'GET':
         return render_template("index.html")
     if request.method == 'POST':
+        print "bharath bharath"
         signup_email = request.form['signup_email']
         signup_password = request.form['signup_password']
         hashemail = hashlib.sha256(signup_email.encode('utf-8')).hexdigest()
