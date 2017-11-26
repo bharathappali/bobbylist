@@ -26,7 +26,7 @@ app.config.update(
     MAIL_PASSWORD = 'BobbylistBobbylistnoreplynoreply'
 )
 
-mongo_client = MongoClient('0.0.0.0',27017)
+mongo_client = MongoClient(host='0.0.0.0',port=27017,connect=False)
 bobbylistdb = mongo_client['bobbylist']
 
 UPLOAD_FOLDER = '/static/imgs/users'
@@ -334,4 +334,5 @@ def logout():
 if __name__ == '__main__':
     app.secret_key = 'tonystark'
     app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['MONGO_CONNECT'] = False
     app.run(host="0.0.0.0")
