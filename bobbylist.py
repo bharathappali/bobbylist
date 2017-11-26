@@ -26,7 +26,7 @@ app.config.update(
     MAIL_PASSWORD = 'BobbylistBobbylistnoreplynoreply'
 )
 
-mongo_client = MongoClient('localhost',27017)
+mongo_client = MongoClient('127.0.0.1',27017)
 bobbylistdb = mongo_client['bobbylist']
 
 UPLOAD_FOLDER = '/static/imgs/users'
