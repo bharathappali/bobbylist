@@ -1,4 +1,4 @@
-from bobbylist import app
+from bobbylist import app as application
 
 if __name__ == "__main__":
-    app.run()
+    application.run()
