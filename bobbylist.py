@@ -277,11 +277,26 @@ def create_task():
         task_dict['tag'] = ''
         bobbylistdb.tasks.insert(task_dict)
         user_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
-        people_db = user_db['people']
+        people_list = []
+        people_list_db = bobbylistdb.users.find_one({"email": session['email']}, {"_id": 0})
+        if people_list_db is not None:
+            if len(people_list_db['people']) > 0:
+                for person in people_list_db['people']:
+                    people_dict = {}
+                    person_db = bobbylistdb.users.find_one({"email": person}, {"_id": 0})
+                    if (person_db is not None):
+                        people_dict['img'] = person_db['img']
+                        people_dict['username'] = person_db['username']
+                        people_dict['email'] = person_db['email']
+                        people_list.append(people_dict)
         tasks_start_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "start"}, {"_id": 0})
-        tasks_current_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "current"}, {"_id": 0})
-        tasks_completed_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "completed"}, {"_id": 0})
-        return render_template("dashboard.html", newuser=False, people_details=people_db, user_details = user_db, tasks_start_details = tasks_start_db, tasks_current_details = tasks_current_db, tasks_completed_details = tasks_completed_db )
+        tasks_current_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "current"},
+                                                  {"_id": 0})
+        tasks_completed_db = bobbylistdb.tasks.find({'task_assignee': session['email'], "status": "completed"},
+                                                    {"_id": 0})
+        return render_template("dashboard.html", newuser=False, user_details=user_db,
+                               tasks_start_details=tasks_start_db, tasks_current_details=tasks_current_db,
+                               tasks_completed_details=tasks_completed_db, people_details=people_list)
 
 @app.route('/dashboard/invite_people', methods=['GET', 'POST'])
 def invite_people():
