@@ -153,7 +153,7 @@ def signup():
         verfication_hash_dict['checked'] = False
         recepients = []
         recepients.append(signup_email)
-        send_mail(recepients,'Your activation link', "Please click on this link http://127.0.0.1:5000/confirm/"+hashemail)
+        send_mail(recepients,'Your activation link', "Please click on this link http://www.bobbylist.com/confirm/"+hashemail)
         if bobbylistdb.email_verification.find_one({"hashemail":hashemail},{"_id":0}) == None:
             bobbylistdb.email_verification.insert(verfication_hash_dict)
         else:
