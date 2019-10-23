@@ -17,7 +17,7 @@ docker-pycreds==0.2.1
 dockerpty==0.4.1
 docopt==0.6.2
 enum34==1.1.6
-Flask==0.12.2
+Flask==1.0
 Flask-Mail==0.9.1
 Flask-Triangle==0.5.4
 functools32==3.2.3.post2
